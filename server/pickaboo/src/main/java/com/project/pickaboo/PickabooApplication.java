@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PickabooApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PickabooApplication.class, args);
-	}
+		SpringApplication.run(PickabooApplication.class, args);	}
 
 }
