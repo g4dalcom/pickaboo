@@ -41,4 +41,10 @@ public class Member {
         this.role = role;
         this.platform = platform;
     }
+
+    public static String getNickname(String username) {
+        int atIndex = username.indexOf("@");
+
+        return username.substring(0, atIndex);
+    }
 }
