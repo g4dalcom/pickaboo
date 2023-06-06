@@ -2,6 +2,8 @@ package com.project.pickaboo.service;
 
 import com.project.pickaboo.domain.Member;
 import com.project.pickaboo.dto.RegisterDto;
+import com.project.pickaboo.exception.CustomException;
+import com.project.pickaboo.exception.ErrorCode;
 import com.project.pickaboo.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +22,11 @@ public class MemberService {
 
     public RegisterDto.Response register(RegisterDto.Request request) {
         if (memberRepository.existsByUsername(request.getUsername())) {
-            throw new IllegalArgumentException("이미 가입된 이메일입니다.");
+            throw new CustomException(ErrorCode.EXIST_USERNAME);
         }
 
         if (!request.getPassword().equals(request.getPasswordConfirm())) {
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            throw new CustomException(ErrorCode.NOT_MATCH_PASSWORD);
         }
 
         Member member = request.toMember(passwordEncoder);
