@@ -42,16 +42,19 @@ public class RegisterDto {
         private String username;
         private String nickname;
         private MemberRoleEnum role;
+        private PlatformEnum platform;
 
         @Builder
-        public Response(final String username, final String nickname, final MemberRoleEnum role) {
+        public Response(final String username, final String nickname, final MemberRoleEnum role, final PlatformEnum platform) {
             this.username = username;
             this.nickname = nickname;
             this.role = role;
+            this.platform = platform;
         }
 
-        public static MemberDto of(Member member) {
-            return MemberDto.builder()
+        // DB 조회를 위한 Entity -> DTO 변환
+        public static Response of(Member member) {
+            return Response.builder()
                     .username(member.getUsername())
                     .nickname(member.getNickname())
                     .role(member.getRole())
