@@ -1,0 +1,4 @@
+= MEMBER
+
+== 회원가입
+operation::member/register/success[snippets='http-request,http-response']
