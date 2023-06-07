@@ -1,4 +1,4 @@
-= API DOCUMENT
+== API DOCUMENT
 
 :doctype: book
 :icons: font

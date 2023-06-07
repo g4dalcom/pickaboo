@@ -32,29 +32,23 @@ public class LoginDto {
         private String nickname;
         private MemberRoleEnum role;
         private PlatformEnum platform;
-        private String accessToken;
-        private String refreshToken;
 
         @Builder
-        public Response(final Long member_id, final String username, final String nickname, final MemberRoleEnum role, final PlatformEnum platform, final String accessToken, final String refreshToken) {
+        public Response(final Long member_id, final String username, final String nickname, final MemberRoleEnum role, final PlatformEnum platform) {
             this.member_id = member_id;
             this.username = username;
             this.nickname = nickname;
             this.role = role;
             this.platform = platform;
-            this.accessToken = accessToken;
-            this.refreshToken = refreshToken;
         }
 
-        public static Response of(Member member, String accessToken, String refreshToken) {
+        public static Response of(Member member) {
             return Response.builder()
                     .member_id(member.getId())
                     .username(member.getUsername())
                     .nickname(member.getNickname())
                     .role(member.getRole())
                     .platform(member.getPlatform())
-                    .accessToken(accessToken)
-                    .refreshToken(refreshToken)
                     .build();
         }
     }
