@@ -476,11 +476,41 @@ Location: /</code></pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_로그인">로그인</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_로그인_http_request">HTTP request</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/members/login HTTP/1.1
+Content-Type: application/json
+Content-Type: application/json
+Content-Length: 61
+Host: localhost:8080
+
+{
+  "username" : "user1@user.com",
+  "password" : "1234"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_로그인_http_response">HTTP response</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2023-06-06 16:53:20 +0900
+Last updated 2023-06-07 11:30:09 +0900
 </div>
 </div>
 </body>

@@ -1,5 +1,6 @@
 package com.project.pickaboo.controller;
 
+import com.project.pickaboo.dto.LoginDto;
 import com.project.pickaboo.dto.RegisterDto;
 import com.project.pickaboo.repository.MemberRepository;
 import com.project.pickaboo.util.ControllerTest;
@@ -36,5 +37,19 @@ class MemberControllerTest extends ControllerTest {
                 .assertThat()
                 .apply(document("member/register/success"))
                 .statusCode(HttpStatus.CREATED.value());
+    }
+
+    @DisplayName("로그인을 성공하면 200 반환")
+    @Test
+    public void login() throws Exception {
+        LoginDto.Request request = new LoginDto.Request("user1@user.com", "1234");
+
+        restDocs
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(request)
+                .when().post("/api/members/login")
+                .then().log().all()
+                .apply(document("member/login/success"))
+                .statusCode(HttpStatus.OK.value());
     }
 }

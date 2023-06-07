@@ -438,12 +438,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>API DOCUMENT</h1>
-<div class="details">
-<span id="revnumber">version 0.0.1-SNAPSHOT</span>
-</div>
 </div>
 <div id="content">
+<div class="sect1">
+<h2 id="_api_document">API DOCUMENT</h2>
+<div class="sectionbody">
+
+</div>
+</div>
 <h1 id="_member" class="sect0"><a class="link" href="#_member">MEMBER</a></h1>
 <div class="sect1">
 <h2 id="_회원가입"><a class="link" href="#_회원가입">회원가입</a></h2>
@@ -477,11 +479,41 @@ Location: /</code></pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_로그인"><a class="link" href="#_로그인">로그인</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_로그인_http_request"><a class="link" href="#_로그인_http_request">HTTP request</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /api/members/login HTTP/1.1
+Content-Type: application/json
+Content-Type: application/json
+Content-Length: 61
+Host: localhost:8080
+
+{
+  "username" : "user1@user.com",
+  "password" : "1234"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_로그인_http_response"><a class="link" href="#_로그인_http_response">HTTP response</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2023-06-06 16:52:20 +0900
+Last updated 2023-06-07 11:30:27 +0900
 </div>
 </div>
 </body>

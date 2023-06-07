@@ -19,32 +19,31 @@ import java.util.Date;
 @Slf4j
 @Component
 public class TokenProvider {
-
     private final SecretKey secretKey;
-    private final long accessTokenValidityInMilliseconds;
-    private final long refreshTokenValidityInMilliseconds;
+    private final long accessTokenExpiredPeriod;
+    private final long refreshTokenExpiredPeriod;
     private final UserDetailsService userDetailsService;
 
     public TokenProvider(@Value("${security.jwt.token.secret-key}") final String secretKey,
-                         @Value("${security.jwt.token.access-token-expire-length}") final long accessTokenValidityInMilliseconds,
-                         @Value("${security.jwt.token.refresh-token.expire.length}") final long refreshTokenValidityInMilliseconds,
+                         @Value("${security.jwt.token.access-token-expire-length}") final long accessTokenExpiredPeriod,
+                         @Value("${security.jwt.token.refresh-token-expire-length}") final long refreshTokenExpiredPeriod,
                          final UserDetailsService userDetailsService) {
 
         this.secretKey = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
-        this.accessTokenValidityInMilliseconds = accessTokenValidityInMilliseconds;
-        this.refreshTokenValidityInMilliseconds = refreshTokenValidityInMilliseconds;
+        this.accessTokenExpiredPeriod = accessTokenExpiredPeriod;
+        this.refreshTokenExpiredPeriod = refreshTokenExpiredPeriod;
         this.userDetailsService = userDetailsService;
     }
 
     public String generateAccessToken(final String userPK) {
-        return createToken(userPK, accessTokenValidityInMilliseconds);
+        return generateToken(userPK, accessTokenExpiredPeriod);
     }
 
     public String generateRefreshToken(final String userPK) {
-        return createToken(userPK, refreshTokenValidityInMilliseconds);
+        return generateToken(userPK, refreshTokenExpiredPeriod);
     }
 
-    public String createToken(final String userPK, final long validityInMilliseconds) {
+    public String generateToken(final String userPK, final long validityInMilliseconds) {
         Claims claims = Jwts.claims().setSubject(userPK);
         Date now = new Date();
         Date expiredIn = new Date(now.getTime() + validityInMilliseconds);
