@@ -3,10 +3,12 @@ package com.project.pickaboo.service;
 import com.project.pickaboo.domain.Member;
 import com.project.pickaboo.domain.RefreshToken;
 import com.project.pickaboo.dto.LoginDto;
+import com.project.pickaboo.dto.MemberDto;
 import com.project.pickaboo.dto.RegisterDto;
 import com.project.pickaboo.exception.CustomException;
 import com.project.pickaboo.exception.ErrorCode;
 import com.project.pickaboo.jwt.TokenProvider;
+import com.project.pickaboo.jwt.UserDetailsImpl;
 import com.project.pickaboo.repository.MemberRepository;
 import com.project.pickaboo.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +27,6 @@ public class MemberService {
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
     private final HttpServletResponse response;
-    public static final String BEARER_TYPE = "bearer ";
     public static final String AUTHORIZATION = "Authorization";
     public static final String REFRESH_HEADER = "RefreshToken";
 
@@ -60,9 +61,25 @@ public class MemberService {
         }
 
         String accessToken = tokenProvider.generateAccessToken(request.getUsername());
-        response.addHeader(AUTHORIZATION, BEARER_TYPE + accessToken);
+        response.addHeader(AUTHORIZATION, accessToken);
         log.info("accessToken = {}", accessToken);
 
         return LoginDto.Response.of(member);
+    }
+
+    public MemberDto getMember(Long id, UserDetailsImpl userDetails) {
+
+        Member member = memberRepository.findByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+
+        if (member.getId().equals(id)) log.info("userDetails = {}", userDetails);
+
+        return MemberDto.builder()
+                .member_id(member.getId())
+                .username(member.getUsername())
+                .nickname(member.getNickname())
+                .role(member.getRole())
+                .platform(member.getPlatform())
+                .build();
     }
 }

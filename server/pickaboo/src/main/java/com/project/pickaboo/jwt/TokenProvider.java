@@ -48,6 +48,8 @@ public class TokenProvider {
         Date now = new Date();
         Date expiredIn = new Date(now.getTime() + validityInMilliseconds);
 
+        log.info("TokenProvider claims = {}", claims);
+
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
@@ -71,6 +73,8 @@ public class TokenProvider {
     }
 
     public boolean validateToken(final String token) {
+        log.info("validateToken token = {}", token);
+
         try {
             Jws<Claims> claims = Jwts.parserBuilder()
                     .setSigningKey(secretKey)
