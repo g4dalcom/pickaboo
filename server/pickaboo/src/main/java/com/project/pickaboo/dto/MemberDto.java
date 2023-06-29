@@ -1,6 +1,5 @@
 package com.project.pickaboo.dto;
 
-import com.project.pickaboo.domain.Member;
 import com.project.pickaboo.domain.MemberRoleEnum;
 import com.project.pickaboo.domain.PlatformEnum;
 import lombok.Builder;
